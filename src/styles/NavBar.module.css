@@ -1,5 +1,17 @@
 .NavBar {
     font-family: "Alike", "Pavanam", sans-serif;
-    color: #f7eedf;
     border: 1px solid #2d3334;
+}
+
+.NavLink {
+    padding: 5px;
+    color: #f7eedf;
+}
+
+.Active i {
+    color: #bec358;
+}
+
+.Active {
+    color: #bec358;
 }
