@@ -21,10 +21,11 @@ const SignUpForm = () => {
     const history = useHistory();
 
     const handleChange = (event) => {
-        setSignUpData({
-            ...signUpData,
+
+        setSignUpData((prevState) => ({
+            ...prevState,
             [event.target.name]: event.target.value
-        })
+        }));
     }
 
     const handleSubmit = async (event) => {
@@ -67,7 +68,7 @@ const SignUpForm = () => {
                                 className={styles.Input}
                                 type="password"
                                 placeholder="Password"
-                                name="password"
+                                name="password1"
                                 value={password1}
                                 onChange={handleChange}
                             />
