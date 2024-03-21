@@ -26,7 +26,8 @@ const SignUpForm = () => {
         setSignUpData((prevState) => ({
             ...prevState,
             [event.target.name]: event.target.value,
-        }));
+        }
+        ));
     }
 
     const handleSubmit = async (event) => {
@@ -37,10 +38,33 @@ const SignUpForm = () => {
             return;
         }
         try {
-            await axios.post("dj-rest-auth/registration/", signUpData);
-            history.push("/signin");
+            await axios.post("https://world-of-craft-0e06bf8581a1.herokuapp.com/dj-rest-auth/registration/", {
+                username,
+                email,
+                password1,
+                password2
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            //At successful sign up - redirect to profile detail page
+            history.push(`/profile/${username}`);
         } catch (err) {
-            setErrors(err.response?.data);
+            if (err.response) {
+                const errorData = err.response.data;
+                // Check if username error exists in the response data
+                if (errorData.username) {
+                    // Set the error message to be displayed on the sign-up page
+                    setErrors({ message: errorData.username.join(', ') });
+                } else {
+                    // If no specific error message found, set a generic error message
+                    setErrors({ message: JSON.stringify(errorData) });
+                }
+            } else {
+                // Handle network errors or other unexpected errors
+                setErrors({ message: 'An error occurred while signing up.' });
+            }
         }
     };
 
@@ -64,7 +88,7 @@ const SignUpForm = () => {
                         </Form.Group>
                         {errors.username?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
-                                {message}
+                                {errors.message}
                             </Alert>
                         ))}
                         <Form.Group controlId="email">
@@ -76,7 +100,7 @@ const SignUpForm = () => {
                                 name="email"
                                 value={email}
                                 onChange={handleChange}
-                                />
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password1">
                             <Form.Label className="d-none">Password</Form.Label>
@@ -106,11 +130,11 @@ const SignUpForm = () => {
                         >
                             Sign up
                         </Button>
-                        {errors.non_field_errors?.map((message, idx) => (
-                            <Alert key={idx} variant="warning" className="mt-3">
-                                {message}
+                        {errors.message && (
+                            <Alert variant="warning" className="mt-3">
+                                {errors.message}
                             </Alert>
-                        ))}
+                        )}
                     </Form>
                 </Container>
                 <Container className={`mt-3 ${appStyles.Content}`}>
