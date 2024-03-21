@@ -11,10 +11,11 @@ import axios from "axios";
 const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
         username: '',
+        email: '',
         password1: '',
         password2: '',
     })
-    const { username, password1, password2 } = signUpData;
+    const { username, email, password1, password2 } = signUpData;
 
     const [errors, setErrors] = useState({})
 
@@ -24,12 +25,17 @@ const SignUpForm = () => {
 
         setSignUpData((prevState) => ({
             ...prevState,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
         }));
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!username || !email || !password1 || !password2) {
+            // If any of the required fields are empty, set an error and return
+            setErrors({ message: 'Please fill in all required fields.' });
+            return;
+        }
         try {
             await axios.post("/dj-rest-auth/registration/", signUpData);
             history.push("/signin");
@@ -61,7 +67,17 @@ const SignUpForm = () => {
                                 {message}
                             </Alert>
                         ))}
-
+                        <Form.Group controlId="email">
+                            <Form.Label className="d-none">Email</Form.Label>
+                            <Form.Control
+                                className={styles.Input}
+                                type="email"
+                                placeholder="Enter email"
+                                name="email"
+                                value={email}
+                                onChange={handleChange}
+                                />
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="password1">
                             <Form.Label className="d-none">Password</Form.Label>
                             <Form.Control
