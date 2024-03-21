@@ -14,10 +14,10 @@ const SignUpForm = () => {
         email: '',
         password1: '',
         password2: '',
-    })
+    });
     const { username, email, password1, password2 } = signUpData;
 
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({});
 
     const history = useHistory();
 

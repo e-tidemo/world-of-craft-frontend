@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import { Route, Switch } from 'react-router-dom'
 import './api/axiosDefault'
 import SignUpForm from './pages/auth/SignUpForm';
+import SignInForm from './pages/auth/SignInForm';
 import ProfileDetail from "./pages/ProfileDetail";
 
 function App() {
@@ -28,20 +29,16 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {/* Pass authentication state and functions as props to NavBar */}
+      {/* Render NavBar with authentication props */}
       <NavBar loggedIn={loggedIn} user={user} onLogout={handleLogout} />
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Home page</h1>} />
-          <Route exact path="/signin">
-            {/* Pass handleLogin function as a prop to SignUpForm */}
-            <SignUpForm onLogin={handleLogin} />
-          </Route>
+          {/* Render SignUpForm with handleLogin function */}
+          <Route exact path="/signin" render={() => <SignInForm onLogin={handleLogin} />} />
           <Route exact path="/signup" render={() => <SignUpForm onLogin={handleLogin} />} />
-          <Route path="/profile/:username">
-            {/* Pass loggedIn and user as props to ProfileDetail */}
-            <ProfileDetail loggedIn={loggedIn} user={user} />
-          </Route>
+          {/* Render ProfileDetail with loggedIn and user props */}
+          <Route path="/profile/:username" render={(props) => <ProfileDetail {...props} loggedIn={loggedIn} user={user} />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
