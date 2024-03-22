@@ -8,6 +8,7 @@ const ProfileDetail = ({ username }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("Username:", username);
         const fetchProfile = async () => {
             try {
                 const response = await axios.get(

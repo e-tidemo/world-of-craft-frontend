@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 
 import Form from "react-bootstrap/Form";
@@ -14,9 +14,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import { SetCurrentUserContext } from "../../App";
 
 
 function SignInForm() {
+    const setCurrentUser = useContext(SetCurrentUserContext);
+
     const [signInData, setSignInData] = useState({ 
         email: '',
         password: '',
@@ -30,7 +33,13 @@ function SignInForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("https://world-of-craft-0e06bf8581a1.herokuapp.com/dj-rest-auth/login/", signInData);
+            const {data} = await axios.post("https://world-of-craft-0e06bf8581a1.herokuapp.com/dj-rest-auth/login/", signInData);
+            setCurrentUser(data.user)
+            /*const { access_token, refresh_token, user } = response.data;
+
+            localStorage.setItem('accessToken', access_token);
+            localStorage.setItem('refreshToken', refresh_token);
+            localStorage.setItem('user', JSON.stringify(user));*/
             navigate("/");
         } catch (error) {
             setErrors(error.response?.data)
@@ -55,6 +64,7 @@ function SignInForm() {
                                 name="email"
                                 value={email}
                                 onChange={handleChange}
+                                autoComplete="email"
                             />
                         </Form.Group>
                         {errors.email?.map((message, idx) => (
