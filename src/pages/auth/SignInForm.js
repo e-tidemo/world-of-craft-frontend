@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -8,12 +9,12 @@ import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-import axios from "axios";
+
 
 function SignInForm() {
     const [signInData, setSignInData] = useState({ 
@@ -23,23 +24,21 @@ function SignInForm() {
 
     const { email, password } = signInData;
 
-    const history = useHistory();
-
     const [errors, setErrors] = useState({});
 
-    const handleChange = (event) => {
-        setSignInData({ ...signInData, [event.target.name]: event.target.value });
-    };
-
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("dj-rest-auth/login/", signInData);
-            history.push("/");
-        } catch (err) {
-            setErrors(err.response?.data)
+            await axios.post("https://world-of-craft-0e06bf8581a1.herokuapp.com/dj-rest-auth/login/", signInData);
+            navigate("/");
+        } catch (error) {
+            setErrors(error.response?.data)
         }
     }
+    const handleChange = (event) => {
+        setSignInData({ ...signInData, [event.target.name]: event.target.value });
+    };
 
     return (
         <Row className={styles.Row}>

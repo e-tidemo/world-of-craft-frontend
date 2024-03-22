@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import styles from './App.module.css';
 import NavBar from './components/NavBar';
-import { Route, Switch } from 'react-router-dom'
+import { Routes, Route } from "react-router-dom";
 import './api/axiosDefault'
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
@@ -15,14 +15,14 @@ function App() {
 
   // Function to handle user login
   const handleLogin = (userData) => {
-    // Perform login logic (e.g., set user data in state)
+    // Perform login logic
     setUser(userData);
     setLoggedIn(true);
   };
 
   // Function to handle user logout
   const handleLogout = () => {
-    // Perform logout logic (e.g., clear user data from state)
+    // Perform logout logic
     setUser(null);
     setLoggedIn(false);
   };
@@ -32,15 +32,15 @@ function App() {
       {/* Render NavBar with authentication props */}
       <NavBar loggedIn={loggedIn} user={user} onLogout={handleLogout} />
       <Container className={styles.Main}>
-        <Switch>
-          <Route exact path="/" render={() => <h1>Home page</h1>} />
+        <Routes>
+          <Route exact="true" path="/" render={() => <h1>Home page</h1>} />
           {/* Render SignUpForm with handleLogin function */}
-          <Route exact path="/signin" render={() => <SignInForm onLogin={handleLogin} />} />
-          <Route exact path="/signup" render={() => <SignUpForm onLogin={handleLogin} />} />
+          <Route exact="true" path="/signin" element={<SignInForm />} render={() => <SignInForm onLogin={handleLogin} />} />
+          <Route exact="true" path="/signup" element={<SignUpForm />}render={() => <SignUpForm onLogin={handleLogin} />} />
           {/* Render ProfileDetail with loggedIn and user props */}
-          <Route path="/profile/:username" render={(props) => <ProfileDetail {...props} loggedIn={loggedIn} user={user} />} />
+          <Route path="/profile/:username" element={<ProfileDetail />} render={(props) => <ProfileDetail {...props} loggedIn={loggedIn} user={user} />} />
           <Route render={() => <p>Page not found!</p>} />
-        </Switch>
+        </Routes>
       </Container>
     </div>
   );
