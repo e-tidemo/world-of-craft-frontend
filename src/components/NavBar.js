@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Navbar, Container, Nav } from "react-bootstrap"
 import logo from "../assets/logo1.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { CurrentUserContext } from '../App';
+
 
 const NavBar = () => {
-    const currentUser = useContext(CurrentUserContext)
+    const currentUser = useCurrentUser();
     const navigate = useNavigate();
     const logout = () => {
         localStorage.clear();
