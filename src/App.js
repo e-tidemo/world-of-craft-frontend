@@ -7,8 +7,7 @@ import './api/axiosDefault'
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import ProfileDetail from "./pages/ProfileDetail";
-
-
+import PostCreateForm from './pages/posts/PostCreateForm';
 
 
 function App() {
@@ -19,9 +18,10 @@ function App() {
           <Container className={styles.Main}>
             <Routes>
               <Route path="/" render={() => <h1>Home page</h1>} />
-              <Route path="/signin" element={<SignInForm />} render={() => <SignInForm />} />
-              <Route path="/signup" element={<SignUpForm />} render={() => <SignUpForm />} />
-              <Route path="/profile/:username" element={<ProfileDetail />} render={(props) => <ProfileDetail />} />
+              <Route path="/signin" element={<SignInForm />} />
+              <Route path="/signup" element={<SignUpForm />} />
+              <Route path="/profile/:username" element={<ProfileDetail />} />
+              <Route path="/post/create" element={<PostCreateForm />}/>
               <Route path="*" element={<p>Page not found!</p>} />
             </Routes>
           </Container>
