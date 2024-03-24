@@ -1,6 +1,7 @@
 .App {
     font-family: "Pavanam", "Red Hat Text", sans-serif;
-    background-color: #2d3334;
+    /*background-color: #2d3334;*/
+    background-color: #bec358;
     min-height: 100vh;
     color: #f7eedf;
 }
@@ -61,4 +62,9 @@ figure {
 
 *::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+Form {
+    background-color: #f7eedf;
+    color: black;
 }

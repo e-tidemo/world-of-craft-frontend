@@ -17,7 +17,7 @@ const NavBar = () => {
 
     const handleSignOut = async () => {
         try {
-            await axios.post('dj-rest-auth/logout/');
+            await axios.post(`dj-rest-auth/logout/`);
             setCurrentUser(null);
         } catch(err) {
             console.log(err);
@@ -27,7 +27,7 @@ const NavBar = () => {
         <NavLink
             className={styles.NavLink}
             activeclassname={styles.Active}
-            to='/posts/create'
+            end to="/posts/create"
         >
             <i className='far fa-plus-square'></i>Add post
         </NavLink>
@@ -37,24 +37,24 @@ const NavBar = () => {
             <NavLink
                 className={styles.NavLink}
                 activeclassname="active"
-                to="/feed">
+                end to="/feed">
                 <i className='fas fa-stream'></i>Feed
             </NavLink>
             <NavLink
                 className={styles.NavLink}
                 activeclassname="active"
-                to="/liked">
+                end to="/liked">
                 <i className='fas fa-heart'></i>Liked
             </NavLink>
             <NavLink
                 className={styles.NavLink}
                 onClick={handleSignOut}
-                to='/'>
+                end to='/'>
                 <i className="fas fa-sign-out-alt"></i>Sign out
             </NavLink>
             <NavLink
                 className={styles.NavLink}
-                to={`/profiles/${currentUser?.profile_id}`}>
+                end to={`/profiles/${currentUser?.profile_id}`}>
                 <Avatar src={currentUser?.profile_image} text='Profile' height={40} />
             </NavLink>
         </>
@@ -63,12 +63,12 @@ const NavBar = () => {
         <>
             <NavLink
                 className={styles.NavLink} activeclassname={styles.Active}
-                to="/signin">
+                end to="/signin">
                 <i className="fas fa-sign-in-alt"></i> Sign in
             </NavLink>
             <NavLink
                 className={styles.NavLink} activeclassname={styles.Active}
-                to="/signup">
+                end to="/signup">
                 <i className="fas fa-user-plus"></i> Sign up
             </NavLink>
         </>
@@ -82,10 +82,10 @@ const NavBar = () => {
         fixed="top"
         >
             <Container>
-                <NavLink to="/">
-                    <Navbar.Brand>
+                <NavLink end to="/">
+                    {/*<Navbar.Brand>
                         <img src={logo} alt="logo" height="150" />
-                    </Navbar.Brand>
+    </Navbar.Brand>*/}
                 </NavLink>
                 {currentUser && addPostIcon}
                 <Navbar.Toggle 
@@ -96,9 +96,8 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto text-left">
                         <NavLink
-                            exact='true'
                             className={styles.NavLink} activeclassname={styles.Active}
-                            to="/"
+                            end to="/"
                         >
                             <i className="fas fa-home"></i> Home
                         </NavLink>

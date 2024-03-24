@@ -21,7 +21,7 @@ function App() {
               <Route path="/signin" element={<SignInForm />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/profile/:username" element={<ProfileDetail />} />
-              <Route path="/post/create" element={<PostCreateForm />}/>
+              <Route path="/posts/create" element={<PostCreateForm />}/>
               <Route path="*" element={<p>Page not found!</p>} />
             </Routes>
           </Container>
