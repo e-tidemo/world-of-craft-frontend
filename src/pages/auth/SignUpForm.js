@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -19,7 +19,7 @@ const SignUpForm = () => {
 
     const [errors, setErrors] = useState({});
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const handleChange = (event) => {
 
@@ -49,7 +49,7 @@ const SignUpForm = () => {
                 }
             });
             //At successful sign up - redirect to profile detail page
-            navigate(`/profile/${username}`);
+            history.push(`/profile/${username}`);
         } catch (err) {
             if (err.response) {
                 const errorData = err.response.data;

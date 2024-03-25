@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const ProfileDetail = ({ username }) => {
     const [profile, setProfile] = useState(null);
-    const navigate = useNavigate();
+    const history = useHistory();
 
     useEffect(() => {
         console.log("Username:", username);
@@ -25,7 +25,7 @@ const ProfileDetail = ({ username }) => {
 
     const handleEditProfile = () => {
         // Redirect user to the edit profile page
-        navigate(`/profile/${username}/edit`);
+        history.push(`/profile/${username}/edit`);
     };
 
     if (!profile) {

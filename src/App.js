@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import styles from './App.module.css';
 import NavBar from './components/NavBar';
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import './api/axiosDefault'
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
@@ -20,25 +20,25 @@ function App() {
         <div className={styles.App}>
           <NavBar />
           <Container className={styles.Main}>
-            <Routes>
-              <Route path="/" element={<PostsPage message="No results found. Adjust the search keyword." />} />
-              <Route path="/feed" element={<PostsPage 
+            <Switch>
+              <Route path="/" render={() => <PostsPage message="No results found. Adjust the search keyword." />} />
+              <Route path="/feed" render={() => <PostsPage 
               message="No results found. Adjust the search keyword or follow a user." 
               filter={`owner__followed__owner__profile=${profile_id}&`}
               />} 
               />
               <Route path="/liked" 
-              element={<PostsPage message="No results found. Adjust the search keyword or like a post." 
+              render={() => <PostsPage message="No results found. Adjust the search keyword or like a post." 
               filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />} 
               />
-              <Route path="/signin" element={<SignInForm />} />
-              <Route path="/signup" element={<SignUpForm />} />
-              <Route path="/profile/:username" element={<ProfileDetail />} />
-              <Route path="/posts/create" element={<PostCreateForm />} />
-              <Route path="/posts/:id" element={<PostPage />} />
-              <Route path="*" element={<p>Page not found!</p>} />
-            </Routes>
+              <Route path="/signin" render={() => <SignInForm />} />
+              <Route path="/signup" render={() => <SignUpForm />} />
+              <Route path="/profile/:username" render={() => <ProfileDetail />} />
+              <Route path="/posts/create" render={() => <PostCreateForm />} />
+              <Route path="/posts/:id" render={() => <PostPage />} />
+              <Route path="*" render={() => <p>Page not found!</p>} />
+            </Switch>
           </Container>
         </div>
   );

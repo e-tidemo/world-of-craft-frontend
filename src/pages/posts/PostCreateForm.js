@@ -10,7 +10,7 @@ import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefault";
 
 
@@ -26,7 +26,7 @@ function PostCreateForm() {
     const { title, content, image } = postData;
 
     const imageInput = useRef(null)
-    const navigate = useNavigate()
+    const history = useHistory()
 
     const handleChange = (event) => {
         console.log('handleChange called');
@@ -58,7 +58,7 @@ function PostCreateForm() {
 
         try {
             const { data } = await axiosReq.post('/posts/', formData);
-            navigate(`/posts/${data.id}`)
+            history.push(`/posts/${data.id}`);
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {
@@ -100,7 +100,7 @@ function PostCreateForm() {
             ))}
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Blue}`}
-                onClick={() => navigate(-1)}
+                onClick={() => history.goBack()}
             >
                 cancel
             </Button>

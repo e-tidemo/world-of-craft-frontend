@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -29,7 +29,7 @@ function SignInForm() {
 
     const [errors, setErrors] = useState({});
 
-    const navigate = useNavigate();
+    const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -40,7 +40,7 @@ function SignInForm() {
             localStorage.setItem('accessToken', access_token);
             localStorage.setItem('refreshToken', refresh_token);
             localStorage.setItem('user', JSON.stringify(user));*/
-            navigate("/");
+            history.push("/");
         } catch (error) {
             setErrors(error.response?.data)
         }
