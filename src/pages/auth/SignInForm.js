@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";

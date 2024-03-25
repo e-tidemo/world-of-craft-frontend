@@ -10,7 +10,7 @@ import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
 import { axiosReq } from "../../api/axiosDefault";
-import { useLocation } from "react-router";
+import { useLocation } from 'react-router';
 import NoResults from "../../assets/no-results.png";
 
 function PostsPage({message, filter=""}) {
@@ -23,7 +23,7 @@ function PostsPage({message, filter=""}) {
             try {
                 const {data} = await axiosReq.get(`/posts/?${filter}`)
                 setPosts(data)
-                setHasLoaded(true)
+                setHasLoaded(1)
             } catch(err){
                 console.log(err)
             }

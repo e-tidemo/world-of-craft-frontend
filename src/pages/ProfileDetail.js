@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from 'react-router-dom';
 
 const ProfileDetail = ({ username }) => {
     const [profile, setProfile] = useState(null);
