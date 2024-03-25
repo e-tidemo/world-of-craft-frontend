@@ -2,11 +2,10 @@ import React from 'react';
 import styles from '../../styles/Post.module.css';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from '../../api/axiosDefault';
-
 
 const Post = (props) => {
     const {
@@ -26,7 +25,7 @@ const Post = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner
+    const is_owner = currentUser?.username === owner;
 
     const handleLike = async () => {
         try {
@@ -35,11 +34,11 @@ const Post = (props) => {
                 ...prevPosts,
                 results: prevPosts.results.map((post) => {
                     return post.id === id
-                    ? {...post, likes_count: post.likes_count + 1, like_id: data.id}
-                    : post;
+                        ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+                        : post;
                 }),
             }));
-        } catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -55,7 +54,7 @@ const Post = (props) => {
                         : post;
                 }),
             }));
-        } catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -64,30 +63,29 @@ const Post = (props) => {
         <Card className={styles.Post}>
             <Card.Body>
                 <Row className="align-items-center justify-content-between">
-                    <Col xs={3}>
-                        <Link to={`/profiles/${profile_id}`}>
-                            <Avatar src={profile_image} height={55} />
-                            {owner}
-                        </Link>
-                    </Col>
-                    <Col xs={9}>
-                        <div className='d-flex align-items-center'>
-                            <span>{updated_at}</span>
-                            {is_owner && postPage && "..."}
-                        </div>
-                    </Col>
+                    <Link to={`/profiles/${profile_id}`}>
+                        <Avatar src={profile_image} height={55} />
+                        {owner}
+                    </Link>
+                    <div className="d-flex align-items-center">
+                        <span>{updated_at}</span>
+                        {is_owner && postPage && "..."}
+                    </div>
                 </Row>
             </Card.Body>
             <Link to={`/posts/${id}`}>
                 <Card.Img src={image} alt={title} />
             </Link>
             <Card.Body>
-                {title && <Card.Title className='text-center'>{title}</Card.Title>}
+                {title && <Card.Title className="text-center">{title}</Card.Title>}
                 {content && <Card.Text>{content}</Card.Text>}
                 <div className={styles.PostBar}>
                     {is_owner ? (
-                        <OverlayTrigger placement='top' overlay={<Tooltip>You can't like your own post!</Tooltip>}>
-                            <i className='far fa-heart' />
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>You can't like your own post!</Tooltip>}
+                        >
+                            <i className="far fa-heart" />
                         </OverlayTrigger>
                     ) : like_id ? (
                         <span onClick={handleUnlike}>
@@ -98,19 +96,22 @@ const Post = (props) => {
                             <i className={`far fa-heart ${styles.HeartOutline}`} />
                         </span>
                     ) : (
-                        <OverlayTrigger placement='top' overlay={<Tooltip>Log in to like posts!</Tooltip>}>
-                            <i className='far fa-heart' />
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>Log in to like posts!</Tooltip>}
+                        >
+                            <i className="far fa-heart" />
                         </OverlayTrigger>
                     )}
                     {likes_count}
                     <Link to={`/posts/${id}`}>
-                        <i className='far fa-comments' />
+                        <i className="far fa-comments" />
                     </Link>
                     {comments_count}
                 </div>
             </Card.Body>
         </Card>
     );
-}
+};
 
 export default Post;
