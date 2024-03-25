@@ -93,10 +93,14 @@ function PostCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-
+            {errors?.content && errors.content.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Blue}`}
-                onClick={() => { }}
+                onClick={() => navigate(-1)}
             >
                 cancel
             </Button>
@@ -113,7 +117,7 @@ function PostCreateForm() {
                     <Container
                         className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
-                        <Form.Group className="text-center" controlId="postCreateForm">
+                        <Form.Group className="text-center">
                             {image ? (
                                 <>
                                     <figure>
@@ -144,6 +148,11 @@ function PostCreateForm() {
                                 ref={imageInput}
                             />
                         </Form.Group>
+                        {errors?.image && errors.image.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                                {message}
+                            </Alert>
+                        ))}
                         <div className="d-md-none">{textFields}</div>
                     </Container>
                 </Col>

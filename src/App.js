@@ -8,6 +8,7 @@ import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import ProfileDetail from "./pages/ProfileDetail";
 import PostCreateForm from './pages/posts/PostCreateForm';
+import PostPage from './pages/posts/PostPage';
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
               <Route path="/signin" element={<SignInForm />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/profile/:username" element={<ProfileDetail />} />
-              <Route path="/posts/create" element={<PostCreateForm />}/>
+              <Route path="/posts/create" element={<PostCreateForm />} />
+              <Route path="/posts/:id" element={<PostPage />} />
               <Route path="*" element={<p>Page not found!</p>} />
             </Routes>
           </Container>
